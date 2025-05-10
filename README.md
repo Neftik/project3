@@ -74,7 +74,10 @@ docker compose down
 ### ✅ Регистрация
 
 ```bash
-curl --location 'http://localhost:8080/api/v1/register' --header 'Content-Type: application/json' --data '{
+curl 
+--location 'http://localhost:8080/api/v1/register' 
+--header 'Content-Type: application/json' 
+--data '{
   "login": "log",
   "password": "pas"
 }'
@@ -83,7 +86,10 @@ curl --location 'http://localhost:8080/api/v1/register' --header 'Content-Type: 
 ### 🔓 Вход
 
 ```bash
-curl --location 'http://localhost:8080/api/v1/login' --header 'Content-Type: application/json' --data '{
+curl 
+--location 'http://localhost:8080/api/v1/login' 
+--header 'Content-Type: application/json' 
+--data '{
   "login": "log",
   "password": "pas"
 }'
@@ -96,7 +102,10 @@ curl --location 'http://localhost:8080/api/v1/login' --header 'Content-Type: app
 ### Отправка выражения:
 
 ```bash
-curl --location 'http://localhost:8080/api/v1/calculate' --header 'Content-Type: application/json' --header 'Authorization: Bearer <ваш_токен>' --data '{
+curl --location 'http://localhost:8080/api/v1/calculate' 
+--header 'Content-Type: application/json' 
+--header 'Authorization: Bearer <ваш_сгенерированный_токен>' 
+--data '{
   "expression": "8+6*2"
 }'
 ```
@@ -104,13 +113,17 @@ curl --location 'http://localhost:8080/api/v1/calculate' --header 'Content-Type:
 ### 🔍 Получение списка выражений:
 
 ```bash
-curl --location 'http://localhost:8080/api/v1/expressions' --header 'Authorization: Bearer <ваш_токен>'
+curl 
+--location 'http://localhost:8080/api/v1/expressions' 
+--header 'Authorization: Bearer <ваш_сгенерированный_токен>'
 ```
 
 ### 🔍 Получение по ID:
 
 ```bash
-curl --location 'http://localhost:8080/api/v1/expression?id=2_p_2' --header 'Authorization: Bearer <ваш_токен>'
+curl 
+--location 'http://localhost:8080/api/v1/expression?id=2_p_2' 
+--header 'Authorization: Bearer <ваш_сгенерированный_токен>'
 ```
 
 ---
@@ -142,7 +155,8 @@ curl --location 'http://localhost:8080/api/v1/expression?id=2_p_2' --header 'Aut
 ## 🔎 Мониторинг агентов
 
 ```bash
-curl --location 'http://localhost:8080/internal/task'
+curl 
+--location 'http://localhost:8080/internal/task'
 ```
 
 ---
