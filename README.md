@@ -75,8 +75,8 @@ docker compose down
 
 ```bash
 curl --location 'http://localhost:8080/api/v1/register' --header 'Content-Type: application/json' --data '{
-  "login": "guest",
-  "password": "guest"
+  "login": "log",
+  "password": "pas"
 }'
 ```
 
@@ -84,8 +84,8 @@ curl --location 'http://localhost:8080/api/v1/register' --header 'Content-Type: 
 
 ```bash
 curl --location 'http://localhost:8080/api/v1/login' --header 'Content-Type: application/json' --data '{
-  "login": "guest",
-  "password": "guest"
+  "login": "log",
+  "password": "pas"
 }'
 ```
 
@@ -120,13 +120,13 @@ curl --location 'http://localhost:8080/api/v1/expression?id=2_p_2' --header 'Aut
 ### Сложное выражение:
 
 ```bash
-"expression": "(3 + 4) * (5 - 2) / 3"
+"expression": "(2 + 7) * (8 - 1) / 4"
 ```
 
 ### Ошибка в выражении:
 
 ```bash
-"expression": "3 + * 5"
+"expression": "9 + * 3"
 ```
 
 👉 Вернёт статус: `invalid`
