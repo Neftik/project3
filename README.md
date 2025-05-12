@@ -52,7 +52,7 @@ TIME_SUBTRACTION_MS=<ЗНАЧЕНИЕ>
 TIME_MULTIPLICATIONS_MS=<ЗНАЧЕНИЕ>
 TIME_DIVISIONS_MS=<ЗНАЧЕНИЕ>
 COMPUTING_POWER=<ЗНАЧЕНИЕ>
-ORCHESTRATOR_ADDRESS=<ЗНАЧЕНИЕ> # "localhost:5000" без Docker; "orchestrator:5000" с Docker
+ORCHESTRATOR_ADDRESS=<ЗНАЧЕНИЕ> # "localhost:8080" без Docker; "orchestrator:8080" с Docker
 ```
 
 2. Запустите проект:
