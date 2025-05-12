@@ -1,7 +1,5 @@
 package ast
 
-// первоначальная проверка на ошибки
-// понижает шанс пропустить ошибку в выражении
 func expErr(expression string) error {
 	len := len(expression)
 	flag := false
@@ -45,7 +43,6 @@ func expErr(expression string) error {
 		}
 	}
 
-	// базовая проверка на корректность скобок
 	if start > end {
 		return ErrNotClosedBracket
 	} else if end > start {

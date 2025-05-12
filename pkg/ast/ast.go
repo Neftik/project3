@@ -27,7 +27,6 @@ func ast(tokens []*token) (*models.AstNode, error) {
 	for _, tok := range tokens {
 		switch tok.t {
 		case operand:
-			// создаем узел для числа
 			node := &models.AstNode{
 				ID:      id,
 				AstType: "number",
@@ -37,17 +36,14 @@ func ast(tokens []*token) (*models.AstNode, error) {
 			id++
 
 		case operator:
-			// один оператор - два операнда
 			if len(stack) < 2 {
 				return nil, ErrInvalidExpression
 			}
 
-			// извлекаем правый и левый операнды (порядок важен)
 			right := stack[len(stack)-1]
 			left := stack[len(stack)-2]
 			stack = stack[:len(stack)-2]
 
-			// создаем новый узел операции для оператора
 			node := &models.AstNode{
 				ID:      id,
 				AstType: "operation",

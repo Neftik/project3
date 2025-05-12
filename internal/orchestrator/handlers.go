@@ -79,8 +79,6 @@ func databaseMiddleware(next http.Handler) http.Handler {
 			return
 		}
 
-		// добавляем выражение в базу данных и получаем id
-		log.Printf("Adding expression to database")
 		e := &models.Expression{
 			Expression: body.Expression,
 			Status:     "in process",
@@ -98,7 +96,6 @@ func databaseMiddleware(next http.Handler) http.Handler {
 		w.Header().Set("Content-Type", "application/json")
 		json.NewEncoder(w).Encode(respID)
 
-		// запускаем вычисления в фоновом режиме
 		go func() {
 			expr := &Expression{
 				exp: body.Expression,
@@ -216,7 +213,6 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 func ExpressionHandler(w http.ResponseWriter, r *http.Request) {
 	expr := r.Context().Value(ctxKey).(*Expression)
 
-	// создаем аст по выражению
 	astRoot, err := ast.Build(expr.exp)
 	if err != nil {
 		errStr := fmt.Sprintf("%s", err)

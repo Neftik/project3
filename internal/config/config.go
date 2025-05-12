@@ -9,19 +9,16 @@ import (
 	"time"
 )
 
-// Config представляет конфигурацию
 type Config struct {
-	TimeAddition        time.Duration // время для сложения
-	TimeSubtraction     time.Duration // время для вычитания
-	TimeMultiplication  time.Duration // время для умножения
-	TimeDivision        time.Duration // время для деления
-	ComputingPower      int           // вычислительная мощность
-	OrchestratorAddress string        // адресс для gRPC подключения к оркестратору
+	TimeAddition        time.Duration
+	TimeSubtraction     time.Duration
+	TimeMultiplication  time.Duration
+	TimeDivision        time.Duration
+	ComputingPower      int
+	OrchestratorAddress string
 }
 
-// LoadConfig загружает конфигурацию из файла .env или использует значения по умолчанию
 func LoadConfig() Config {
-	// значения по умолчанию
 	cfg := Config{
 		TimeAddition:        2000 * time.Millisecond,
 		TimeSubtraction:     2000 * time.Millisecond,
@@ -31,7 +28,6 @@ func LoadConfig() Config {
 		OrchestratorAddress: "localhost:5000",
 	}
 
-	// Открываем файл .env
 	file, err := os.Open(".env")
 	if err != nil {
 		log.Println("File .env not found. Using default values.")
@@ -39,15 +35,12 @@ func LoadConfig() Config {
 	}
 	defer file.Close()
 
-	// Читаем файл построчно
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		line := scanner.Text()
-		// Пропускаем пустые строки и комментарии
 		if len(line) == 0 || strings.HasPrefix(line, "#") {
 			continue
 		}
-		// Разделяем строку на ключ и значение
 		parts := strings.SplitN(line, "=", 2)
 		if len(parts) != 2 {
 			continue
@@ -55,7 +48,6 @@ func LoadConfig() Config {
 		key := strings.TrimSpace(parts[0])
 		value := strings.TrimSpace(parts[1])
 
-		// Присваиваем значения в зависимости от ключа
 		switch key {
 		case "TIME_ADDITION_MS":
 			if v, err := strconv.Atoi(value); err == nil && v > 0 {
@@ -82,7 +74,6 @@ func LoadConfig() Config {
 		}
 	}
 
-	// Проверяем ошибки сканера
 	if err := scanner.Err(); err != nil {
 		log.Println("Error reading .env file:", err)
 	}

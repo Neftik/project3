@@ -73,13 +73,10 @@ func checkId(id string) bool {
 }
 
 func (o *Orchestrator) Run() {
-	// подключение к бд
 	db = database.NewDB()
 	defer db.Store.Close()
 
-	// запуск менеджера каналов выражений
 	StartManager()
-	// запуск сервера для общения с агентом
 	go runGRPC()
 
 	mux := http.NewServeMux()
@@ -89,7 +86,6 @@ func (o *Orchestrator) Run() {
 	expr := http.HandlerFunc(ExpressionHandler)
 	getData := http.HandlerFunc(GetDataHandler)
 
-	// хендлеры
 	mux.Handle("/api/v1/register", logsMiddleware(register))
 	mux.Handle("/api/v1/login", logsMiddleware(login))
 	mux.Handle("/api/v1/calculate", logsMiddleware(authMiddleware(databaseMiddleware(expr))))
@@ -97,5 +93,4 @@ func (o *Orchestrator) Run() {
 
 	log.Printf("Starting server on port %s", port)
 	log.Fatal(http.ListenAndServe(port, mux))
-
 }

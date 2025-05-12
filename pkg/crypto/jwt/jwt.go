@@ -16,9 +16,9 @@ func Generate(id int) (string, error) {
 	now := time.Now()
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"id":  id,
-		"nbf": now.Unix(),                     // когда станет валидным
-		"exp": now.Add(24 * time.Hour).Unix(), // когда перестанет быть валидным
-		"iat": now.Unix(),                     // время создания
+		"nbf": now.Unix(),
+		"exp": now.Add(24 * time.Hour).Unix(),
+		"iat": now.Unix(),
 	})
 
 	tokenString, err := token.SignedString([]byte(HmacSampleSecret))

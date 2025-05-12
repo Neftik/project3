@@ -5,13 +5,11 @@ import (
 	"regexp"
 )
 
-// структура для первоначального разбиения строки на токены
 type token struct {
-	t   string // тип токена
-	val string // значение токена
+	t   string
+	val string
 }
 
-// работает на регулярках, проверяет, является символ оператором
 func typeCheck(symbol string) bool {
 	pattern := "[+\\-*/]"
 	r, err := regexp.Compile(pattern)
@@ -28,11 +26,11 @@ func tokens(str string) []*token {
 	i := 0
 	for i < len(str) {
 		switch {
-		case typeCheck(string(str[i])): // если оператор
+		case typeCheck(string(str[i])):
 			tokens = append(tokens, &token{t: operator, val: string(str[i])})
 			i++
 
-		case str[i] >= 48 && str[i] <= 57: // если число
+		case str[i] >= 48 && str[i] <= 57:
 			tmp := ""
 			for i < len(str) && ((str[i] >= 48 && str[i] <= 57) || str[i] == 44 || str[i] == 46) {
 				tmp += string(str[i])
@@ -40,7 +38,7 @@ func tokens(str string) []*token {
 			}
 			tokens = append(tokens, &token{t: operand, val: string(tmp)})
 
-		case str[i] == 40 || str[i] == 41: // если скобка
+		case str[i] == 40 || str[i] == 41:
 			tp := openBracket
 			if str[i] == 41 {
 				tp = closeBracket

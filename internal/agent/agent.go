@@ -24,7 +24,6 @@ var (
 )
 
 func New(cfg config.Config) *Agent {
-	// передаем конфиг с переменными средами в агента
 	return &Agent{config: cfg}
 }
 
@@ -36,5 +35,5 @@ func (a *Agent) Run() {
 		go worker(a.config)
 	}
 
-	select {} // бесконечное ожидание
+	select {}
 }

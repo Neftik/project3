@@ -41,11 +41,10 @@ func rpn(tokens []*token) ([]*token, error) {
 				return nil, err
 			}
 
-			// извлекаем операторы с большим или равным приоритетом
 			for stack.len() > 0 {
 				top := stack.peek()
 				if top.t == openBracket {
-					break // открывающая скобка прерывает извлечение
+					break
 				}
 
 				topPriority, err := priority(top.val)
@@ -66,7 +65,6 @@ func rpn(tokens []*token) ([]*token, error) {
 			stack.push(tok)
 
 		case closeBracket:
-			// извлекаем до открывающей скобки
 			found := false
 			for stack.len() > 0 {
 				popped, err := stack.pop()
@@ -88,7 +86,6 @@ func rpn(tokens []*token) ([]*token, error) {
 		}
 	}
 
-	// достаем оставшиеся операторы
 	for stack.len() > 0 {
 		popped, err := stack.pop()
 		if err != nil {
